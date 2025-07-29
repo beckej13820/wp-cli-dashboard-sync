@@ -43,11 +43,11 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 
                 WP_CLI::log( "Syncing dashboard for site ID: $site_id" );
 
-                $admins = get_users( [ 'role' => 'administrator', 'fields' => 'ID' ] );
-                foreach ( $admins as $admin_id ) {
-                    update_user_meta( $admin_id, 'meta-box-order_dashboard', $master_order );
-                    update_user_meta( $admin_id, 'metaboxhidden_dashboard', $master_hidden );
-                    WP_CLI::log( " - Updated user ID: $admin_id" );
+                $users = get_users( [ 'fields' => 'ID' ] );
+                foreach ( $users as $user_id ) {
+                    update_user_meta( $user_id, 'meta-box-order_dashboard', $master_order );
+                    update_user_meta( $user_id, 'metaboxhidden_dashboard', $master_hidden );
+                    WP_CLI::log( " - Updated user ID: $user_id" );
                 }
 
                 restore_current_blog();
